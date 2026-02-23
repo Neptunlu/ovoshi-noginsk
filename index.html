@@ -7,33 +7,141 @@
 <meta name="description" content="Крупный поставщик овощей и фруктов оптом в Ногинске. Работаем с кафе, ресторанами и торговыми точками.">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body{margin:0;font-family:'Montserrat',sans-serif;background:#f4f6f9;color:#222}
-header{background:linear-gradient(135deg,#0f3d1e,#1b5e20);color:white;padding:80px 20px;text-align:center}
-header h1{margin:0;font-size:40px}
-header p{margin-top:15px;font-size:18px;opacity:.95}
-.btn{display:inline-block;margin-top:25px;padding:14px 30px;background:#ff9800;color:white;text-decoration:none;border-radius:6px;font-weight:600;transition:.3s}
-.btn:hover{background:#e68900}
-section{padding:80px 20px}
-.container{max-width:1200px;margin:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
-.card{background:white;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,.08);overflow:hidden;transition:.3s;text-align:center;padding-bottom:20px}
-.card:hover{transform:translateY(-8px)}
-.card img{width:100%;height:220px;object-fit:cover}
-.card h3{margin:15px 0}
-.qty{width:60px;padding:5px;text-align:center}
-.add-btn{margin-top:10px;padding:8px 16px;border:none;background:#1b5e20;color:white;border-radius:5px;cursor:pointer}
-.add-btn:hover{background:#124017}
-.cart{position:fixed;right:20px;bottom:20px;background:#ff9800;color:white;padding:15px 20px;border-radius:50px;font-weight:600;cursor:pointer}
-.cart-box{position:fixed;right:20px;bottom:90px;background:white;width:300px;max-height:400px;overflow:auto;box-shadow:0 8px 25px rgba(0,0,0,.2);border-radius:15px;padding:15px;display:none}
-.cart-box h3{text-align:center;margin-top:0}
-.checkout{background:#1b5e20;color:white;border:none;padding:10px;width:100%;border-radius:6px;margin-top:10px;cursor:pointer}
-footer{background:#111;color:#ccc;text-align:center;padding:40px 20px}
+body {
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  background:#fafafa;
+  color:#222;
+}
+header {
+  background:#ffffff;
+  padding:60px 20px;
+  text-align:center;
+  border-bottom:1px solid #e0e0e0;
+}
+header h1 {
+  margin:0;
+  font-size:36px;
+  font-weight:700;
+}
+header p {
+  margin-top:10px;
+  font-size:18px;
+  color:#555;
+}
+.btn {
+  display:inline-block;
+  margin-top:20px;
+  padding:14px 28px;
+  background:#ff9800;
+  color:white;
+  text-decoration:none;
+  border-radius:6px;
+  font-weight:600;
+  transition:0.3s;
+}
+.btn:hover {background:#e68900;}
+section {
+  padding:60px 20px;
+}
+.container {
+  max-width:1200px;
+  margin:auto;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+.card {
+  background:white;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,0.05);
+  text-align:center;
+  transition:0.3s;
+  padding-bottom:20px;
+}
+.card:hover {transform:translateY(-5px);}
+.card img {
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+.card h3 {
+  margin:15px 0;
+}
+.qty {
+  width:60px;
+  padding:5px;
+  text-align:center;
+  margin-top:5px;
+}
+.add-btn {
+  margin-top:10px;
+  padding:8px 16px;
+  border:none;
+  background:#1b5e20;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+  transition:0.3s;
+}
+.add-btn:hover {background:#124017;}
+.cart {
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#ff9800;
+  color:white;
+  padding:15px 20px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+}
+.cart-box {
+  position:fixed;
+  right:20px;
+  bottom:90px;
+  background:white;
+  width:300px;
+  max-height:400px;
+  overflow:auto;
+  box-shadow:0 8px 25px rgba(0,0,0,.2);
+  border-radius:15px;
+  padding:15px;
+  display:none;
+}
+.cart-box h3 {
+  text-align:center;
+  margin-top:0;
+}
+.checkout {
+  background:#1b5e20;
+  color:white;
+  border:none;
+  padding:10px;
+  width:100%;
+  border-radius:6px;
+  margin-top:10px;
+  cursor:pointer;
+}
+footer {
+  background:#111;
+  color:#ccc;
+  text-align:center;
+  padding:40px 20px;
+  font-size:14px;
+}
 @media(max-width:768px){
-header h1{font-size:28px}
+  header h1 {font-size:28px;}
 }
 </style>
 </head>
 <body>
+
+<div class="cart" onclick="toggleCart()">🛒 Склад (<span id="cart-count">0</span>)</div>
 
 <header>
 <h1>Оптовая база овощей и фруктов</h1>
@@ -44,13 +152,9 @@ header h1{font-size:28px}
 <section id="catalog">
 <div class="container">
 <h2 style="text-align:center;margin-bottom:40px">Каталог продукции</h2>
-
 <div class="grid" id="products"></div>
-
 </div>
 </section>
-
-<div class="cart" onclick="toggleCart()">🛒 Склад (<span id="cart-count">0</span>)</div>
 
 <div class="cart-box" id="cart-box">
 <h3>Ваш заказ</h3>
@@ -66,7 +170,7 @@ header h1{font-size:28px}
 </footer>
 
 <script>
-const productList = [
+const productList=[
 {name:"Картофель",img:"https://images.unsplash.com/photo-1582515073490-dcaa5e0a6f74"},
 {name:"Помидоры",img:"https://images.unsplash.com/photo-1567306226416-28f0efdc88ce"},
 {name:"Огурцы",img:"https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2"},
